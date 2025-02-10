@@ -8,6 +8,18 @@ import './index.scss'
 
 const app = document.getElementById('app');
 const volumeControl = document.getElementById('volume');
+const rain = document.getElementById('rain');
+rain.style.backgroundImage = `url(${rainyBg})`;
+rain.style.backgroundSize = 'cover';
+const summer = document.getElementById('summer');
+summer.style.backgroundImage = `url(${summerBg})`;
+summer.style.backgroundSize = 'cover';
+
+const winter = document.getElementById('winter');
+winter.style.backgroundImage = `url(${winterBg})`;
+winter.style.backgroundSize = 'cover';
+
+
 let currentAudio = null;
 let currentVolume = 0.5;
 
@@ -36,9 +48,9 @@ function playSound(sound) {
   }
 }
 
-document.getElementById('rain').addEventListener('click', () => playSound(sounds.rain));
-document.getElementById('summer').addEventListener('click', () => playSound(sounds.summer));
-document.getElementById('winter').addEventListener('click', () => playSound(sounds.winter));
+rain.addEventListener('click', () => playSound(sounds.rain));
+summer.addEventListener('click', () => playSound(sounds.summer));
+winter.addEventListener('click', () => playSound(sounds.winter));
 
 volumeControl.addEventListener('input', (e) => {
   currentVolume = parseFloat(e.target.value);

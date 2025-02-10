@@ -8,12 +8,26 @@
 </head>
 <body>
     <div id="app">
+        <div class="container">
         <div class="controls">
+            <button id="rain">
+                <div class="icon-container">
+                    <img src="/assets/icons/cloud-rain.svg" alt="rain" class="icon">                
+                </div>
+            </button>
+            <button id="summer">
+                <div class="icon-container">
+                    <img src="/assets/icons/sun.svg" alt="summer" class="icon">                
+                </div>
+            </button>
+            <button id="winter">
+                <div class="icon-container">
+                    <img src="/assets/icons/cloud-snow.svg" alt="snow" class="icon">                
+                </div>
+            </button>
             <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
-            <button id="rain">Rain</button>
-            <button id="summer">Summer</button>
-            <button id="winter">Winter</button>
           </div>
+        </div>
     </div>
 </body>
 </html>
