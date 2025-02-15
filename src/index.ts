@@ -6,8 +6,8 @@ import summerAudio from './assets/sounds/summer.mp3';
 import winterAudio from './assets/sounds/winter.mp3';
 import './index.scss'
 
-const app = document.getElementById('app');
-const volumeControl = document.getElementById('volume');
+const app: HTMLElement = document.getElementById('app');
+const volumeControl: HTMLInputElement = <HTMLInputElement>document.getElementById('volume');
 const rain = document.getElementById('rain');
 rain.style.backgroundImage = `url(${rainyBg})`;
 rain.style.backgroundSize = 'cover';
@@ -20,10 +20,17 @@ winter.style.backgroundImage = `url(${winterBg})`;
 winter.style.backgroundSize = 'cover';
 
 
-let currentAudio = null;
-let currentVolume = 0.5;
+let currentAudio: HTMLAudioElement  = null;
+let currentVolume:number = 0.5;
 
-const sounds = {
+interface Sound {
+  audio: HTMLAudioElement,
+  bg: string,
+}
+
+type Sounds = "rain" | "summer" | "winter";
+
+const sounds: Record<string, Sound> = {
   rain: { audio: new Audio(rainAudio), bg: rainyBg },
   summer: { audio: new Audio(summerAudio), bg: summerBg },
   winter: { audio: new Audio(winterAudio), bg: winterBg },
@@ -33,7 +40,7 @@ Object.values(sounds).forEach((sound) => {
   sound.audio.volume = currentVolume;
 });
 
-function playSound(sound) {
+function playSound(sound: Sound ) {
   if (currentAudio && currentAudio !== sound.audio) {
     currentAudio.pause();
     currentAudio.currentTime = 0;
@@ -52,11 +59,16 @@ rain.addEventListener('click', () => playSound(sounds.rain));
 summer.addEventListener('click', () => playSound(sounds.summer));
 winter.addEventListener('click', () => playSound(sounds.winter));
 
-volumeControl.addEventListener('input', (e) => {
-  currentVolume = parseFloat(e.target.value);
-  if (currentAudio) {
-    currentAudio.volume = currentVolume;
-  }
-});
+if (volumeControl) {
+  volumeControl.addEventListener('input', (e: MouseEvent | null) => {
+    currentVolume = parseFloat((e.target  as HTMLTextAreaElement ).value);
+    if (currentAudio) {
+      currentAudio.volume = currentVolume;
+    }
+  });
 
-volumeControl.value = currentVolume;
+volumeControl.valueAsNumber = currentVolume;
+}
+
+
+
